@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Dashboard</title>
+</head>
+<body>
+    <h1>Welcome, {{ session['student_username'] }}</h1>
+
+    <!-- List of available forms -->
+    <h2>Available Forms</h2>
+    {% if forms %}
+        <ul>
+            {% for form in forms %}
+                <li>
+                    {{ form.title }} 
+                    <a href="/fill_form/{{ form.form_id }}">Fill Form</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No forms available at the moment.</p>
+    {% endif %}
+
+    <!-- Logout Button -->
+    <form action="/student/logout" method="POST">
+        <button type="submit">Logout</button>
+    </form>
+</body>
+</html>

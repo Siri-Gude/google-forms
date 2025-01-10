@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Submissions</title>
+</head>
+<body>
+    <h1>Submissions for "{{ form.title }}"</h1>
+
+    <!-- Download Button -->
+    <a href="/admin/download_submissions/{{ form.form_id }}">
+        <button>Download Submissions</button>
+    </a>
+
+    {% if submissions %}
+        <table border="1">
+            <thead>
+                <tr>
+                    <th>Student</th>
+                    {% for question in form.questions %}
+                        <th>{{ question.text }}</th>
+                    {% endfor %}
+                </tr>
+            </thead>
+            <tbody>
+                {% for submission in submissions %}
+                    <tr>
+                        <td>{{ submission.student_id }}</td>
+                        {% for answer in submission.answers %}
+                            <td>
+                                {% if answer is iterable and not answer|string %}
+                                    {{ answer | join(", ") }}
+                                {% else %}
+                                    {{ answer }}
+                                {% endif %}
+                            </td>
+                        {% endfor %}
+                    </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% else %}
+        <p>No submissions for this form yet.</p>
+    {% endif %}
+</body>
+</html>

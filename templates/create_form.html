@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Form</title>
+    <script>
+        function addQuestion() {
+            const container = document.getElementById('questions-container');
+            const questionHTML = `
+                <div class="question">
+                    <label>Question Text:</label>
+                    <input type="text" name="question_text" required><br>
+                    
+                    <label>Question Type:</label>
+                    <select name="question_type" required>
+                        <option value="text">Text</option>
+                        <option value="radio">Radio Button</option>
+                        <option value="checkbox">Checkbox</option>
+                    </select><br>
+                    
+                    <label>Options (comma-separated, required for radio/checkbox):</label>
+                    <input type="text" name="question_options"><br>
+                </div><hr>`;
+            container.innerHTML += questionHTML;
+        }
+    </script>
+</head>
+<body>
+    <h1>Create a New Form</h1>
+    <form method="POST">
+        <label for="form_title">Form Title:</label>
+        <input type="text" name="form_title" required><br><br>
+
+        <div id="questions-container">
+            <!-- Questions will be added here dynamically -->
+        </div>
+
+        <button type="button" onclick="addQuestion()">Add Question</button><br><br>
+        <button type="submit">Create Form</button>
+    </form>
+</body>
+</html>

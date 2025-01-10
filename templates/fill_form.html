@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fill Form</title>
+</head>
+<body>
+    <h1>{{ form.title }}</h1>
+    <form method="POST">
+        {% for question in form.questions %}
+            <label>{{ question.text }}</label><br>
+            {% if question.type == 'text' %}
+                <input type="text" name="{{ question.text }}" required><br><br>
+            {% elif question.type == 'radio' %}
+                {% for option in question.options %}
+                    <input type="radio" name="{{ question.text }}" value="{{ option }}" required> {{ option }}<br>
+                {% endfor %}
+            {% elif question.type == 'checkbox' %}
+                {% for option in question.options %}
+                    <input type="checkbox" name="{{ question.text }}" value="{{ option }}"> {{ option }}<br>
+                {% endfor %}
+            {% endif %}
+        {% endfor %}
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

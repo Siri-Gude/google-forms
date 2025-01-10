@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>View Submissions</title>
+</head>
+<body>
+    <h1>View Submissions</h1>
+
+    {% if forms %}
+        <ul>
+            {% for form in forms %}
+                <li>
+                    <a href="/admin/form_submissions/{{ form.form_id }}">
+                        <button>{{ form.title }}</button>
+                    </a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No forms available.</p>
+    {% endif %}
+</body>
+</html>
